@@ -23,8 +23,8 @@ public class MCQservletDelete extends SpringServlet{
 	@Override
 		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		MCQChoice mcqc = qs.getMCQ(request,response);
+		MCQChoice mcqc = qs.getselectChoice(request,response);
         mcqChoiceDAO.delete(mcqc);
-        response.sendRedirect("welcome.html");
+        response.sendRedirect("welcome.jsp");
 		}
 }

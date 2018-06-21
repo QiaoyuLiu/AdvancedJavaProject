@@ -15,13 +15,9 @@ public class StartServlet extends SpringServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-			
-
 		qs.randomstart(request, response);
-		request.getSession().getAttribute("1");
-		response.sendRedirect("quiz.html");
-		}
-		
+		response.sendRedirect("quiz.jsp");
+		}	
 	}
 
 

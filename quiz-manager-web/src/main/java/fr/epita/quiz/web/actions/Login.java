@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.epita.quiz.datamodel.Question;
+import fr.epita.quiz.datamodel.QuestionType;
 import fr.epita.quiz.services.AuthenticationService;
+import fr.epita.quiz.services.QuestionDAO;
 
 /**
  * Servlet implementation class Login
@@ -21,7 +24,8 @@ public class Login extends SpringServlet {
 
 	@Inject
 	AuthenticationService auth;
-
+	@Inject
+	QuestionDAO questionDAO;
 	/**
 	 * Default constructor.
 	 */

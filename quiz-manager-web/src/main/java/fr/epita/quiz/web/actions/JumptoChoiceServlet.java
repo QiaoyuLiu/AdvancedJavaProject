@@ -14,11 +14,7 @@ public class JumptoChoiceServlet extends SpringServlet{
 	QuestionsServices qs;
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		qs.getMCQ(request, response);
-		request.getSession().setAttribute(null, null);
-			response.sendRedirect("choiceedit.jsp");
-
-		
+		qs.sendQuestionMsg(request, response);
+			response.sendRedirect("editchoice.jsp");
 		}
-		
 	}

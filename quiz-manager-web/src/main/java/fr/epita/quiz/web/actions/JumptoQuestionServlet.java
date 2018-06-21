@@ -15,10 +15,7 @@ public class JumptoQuestionServlet extends SpringServlet{
 	QuestionsServices qs;
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
-		
-		qs.sendAllQuestions();
-		request.getSession().setAttribute(null, null);
+		qs.sendAllQuestions(request, response);
 			response.sendRedirect("editquestion.jsp");
 
 		

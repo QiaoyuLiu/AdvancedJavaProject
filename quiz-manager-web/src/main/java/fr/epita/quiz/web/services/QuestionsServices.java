@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -29,11 +30,11 @@ public class QuestionsServices {
 	public MCQChoice getMCQ(HttpServletRequest request, HttpServletResponse response) {
 	    MCQChoice mcqc=new MCQChoice();
 		Question question=new Question();
-		int b = Integer.parseInt(request.getParameter("valide"));
-		String choice = request.getParameter("choice");
-		int mcqcid = Integer.parseInt(request.getParameter("id"));
-		int order = Integer.parseInt(request.getParameter("order"));
-		int qid = Integer.parseInt(request.getParameter("questionId"));
+		int b = Integer.parseInt(request.getParameter("getchoicevalide"));
+		String choice = request.getParameter("getchoice");
+		int mcqcid = Integer.parseInt(request.getParameter("getchoiceid"));
+		int order = Integer.parseInt(request.getParameter("getchoiceorder"));
+		int qid = Integer.parseInt((String) request.getSession().getAttribute("getselectquestionid"));
 		question.setId(qid);
 		question = questionDAO.search(question).get(0);
 		mcqc.setQuestion(question);
@@ -44,88 +45,65 @@ public class QuestionsServices {
 		return mcqc;
 	}
 	
+	public MCQChoice getselectChoice(HttpServletRequest request, HttpServletResponse response) {
+		MCQChoice mcqc = new MCQChoice();
+		mcqc.setId(Integer.parseInt(request.getParameter("getselectchoiceid")));
+		return mcqChoiceDAO.search(mcqc).get(0);
+	}
+	
+	public Question getselectQuestion(HttpServletRequest request, HttpServletResponse response) {
+		Question question = new Question();
+		question.setId(Integer.parseInt(request.getParameter("getselectquestionid")));
+		return questionDAO.search(question).get(0);
+		}
+	
 	public void sendQuestionMsg(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		PrintWriter pw = response.getWriter();
+		HttpSession session = request.getSession();
 		Question quest = new Question();
-		quest.setId(Integer.parseInt(request.getParameter("questionId")));
+		quest.setId(Integer.parseInt(request.getParameter("getselectquestionid")));
 		List<Question> questions = questionDAO.search(quest);
-			JsonObject Jquestion = new JsonObject();
 			MCQChoice mcq = new MCQChoice();
 			mcq.setQuestion(questions.get(0));
 			List<MCQChoice> choices = mcqChoiceDAO.search(mcq);
-			JsonArray Jchoices = new JsonArray();
-			for(MCQChoice mcqc:choices) {
-			JsonObject Jchoice = new JsonObject();
-			Jchoice.addProperty("choice",mcqc.getChoice());
-			Jchoice.addProperty("id",mcqc.getId());
-			Jchoice.addProperty("valid",mcqc.isValid());
-			Jchoice.addProperty("questionId",mcqc.getQuestion().getId());
-			Jchoice.addProperty("order",mcqc.getOrder());
-			Jchoices.add(Jchoice);
+			for(int i=0;i<choices.size();i++) {
+				session.setAttribute(String.valueOf(choices.get(i).getId()), choices.get(i).getChoice());
 			}
-			Jquestion.addProperty("questioncontent",questions.get(0).getQuestion());
-			Jquestion.addProperty("questionId", questions.get(0).getId());
-			Jquestion.add("choices",Jchoices);
-
-		
-		pw.println(Jquestion);
 	}
 	
-	public JsonObject sendAllQuestions() throws IOException {
-		JsonObject QandCs = new JsonObject();
+	public void sendAllQuestions(HttpServletRequest request, HttpServletResponse response)  {
 		List<Question> questions = questionDAO.search(new Question());
-		for(Question question:questions) {
-			MCQChoice choice =new MCQChoice();
-			choice.setQuestion(question);
-			JsonObject Jquestion = new JsonObject();
-			List<MCQChoice> choices = mcqChoiceDAO.search(choice);
-			JsonArray Jchoices = new JsonArray();
-			for(MCQChoice mcqc:choices) {
-			JsonObject Jchoice = new JsonObject();
-			Jchoice.addProperty("choice",mcqc.getChoice());
-			Jchoice.addProperty("id",mcqc.getId());
-			Jchoice.addProperty("valid",mcqc.isValid());
-			Jchoice.addProperty("questionId",mcqc.getQuestion().getId());
-			Jchoice.addProperty("order",mcqc.getOrder());
-			Jchoices.add(Jchoice);
-			}
-			Jquestion.addProperty("questioncontent",question.getQuestion());
-			Jquestion.addProperty("questionId", question.getId());
-			Jquestion.add("choices",Jchoices);
-			QandCs.add("question", Jquestion);
+		HttpSession session = request.getSession();
+		int number = Integer.parseInt(request.getParameter("questionsnumber"));
+		for(int i=0;i<questions.size();i++) {
+			session.setAttribute(String.valueOf(questions.get(i).getId()), questions.get(i).getQuestion());
 		}
-		return QandCs;
+		session.setAttribute("questionsnumber", number);
 	}
 	
-	public void randomstart(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		JsonObject QandCs = new JsonObject();
-		PrintWriter pw = response.getWriter();
-		List<Question> questions = qoService.randomquestions(Integer.parseInt(request.getParameter("questionsnumber")));
-		for(Question question:questions) {
-			JsonObject Jquestion = new JsonObject();
-			List<MCQChoice> choices = qoService.getChoices(question, Integer.parseInt(request.getParameter("choicesnumber")));
-			JsonArray Jchoices = new JsonArray();
-			for(MCQChoice mcqc:choices) {
-			JsonObject Jchoice = new JsonObject();
-			Jchoice.addProperty("choice",mcqc.getChoice());
-			Jchoice.addProperty("id",mcqc.getId());
-			Jchoice.addProperty("valid",mcqc.isValid());
-			Jchoice.addProperty("questionId",mcqc.getQuestion().getId());
-			Jchoice.addProperty("order",mcqc.getOrder());
-			Jchoices.add(Jchoice);
+	public void randomstart(HttpServletRequest request, HttpServletResponse response)  {
+		int i = 0;
+		int j = 0;
+		int number;
+		HttpSession session = request.getSession();
+		number = Integer.parseInt(request.getParameter("questionsnumber"));
+		List<Question> questions = qoService.randomquestions(number);
+		for(i=0;i<questions.size();i++)
+		{
+			session.setAttribute("question"+1, questions.get(i).getQuestion());
+			List<MCQChoice> choices = qoService.getChoices(questions.get(i), 4);
+			for(j=0;j<choices.size();j++) {
+			session.setAttribute("question"+i+"choice"+j+"title", choices.get(j).getChoice());
+			session.setAttribute("question"+i+"choice"+j+"valid", choices.get(j).isValid());
 			}
-			Jquestion.addProperty("questioncontent",question.getQuestion());
-			Jquestion.addProperty("questionId", question.getId());
-			Jquestion.add("choices",Jchoices);
-			QandCs.add("question", Jquestion);
 		}
-		pw.println(QandCs.toString());
+		session.setAttribute("questionsnumber", number);
+
 	}
 	
     public Question getQuestion(HttpServletRequest request, HttpServletResponse response) {
 		Question question=new Question();
-		int qid = Integer.parseInt(request.getParameter("questionid"));
-		String questionstring = request.getParameter("question");
+		int qid = Integer.parseInt(request.getParameter("getquestionid"));
+		String questionstring = request.getParameter("getquestion");
 		question.setType(getQuestionType(request));
 		question.setId(qid);
 		question.setQuestion(questionstring);   	
@@ -133,7 +111,7 @@ public class QuestionsServices {
 		}
     
     public QuestionType getQuestionType(HttpServletRequest request) {
-    	String type = request.getParameter("type");
+    	String type = request.getParameter("getquestiontype");
     	switch (type) {
     	case "MCQ": return QuestionType.MCQ;
     	case "ASSOCIATIVE":return QuestionType.ASSOCIATIVE;

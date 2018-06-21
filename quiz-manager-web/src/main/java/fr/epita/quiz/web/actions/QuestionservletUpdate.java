@@ -31,7 +31,7 @@ public class QuestionservletUpdate extends SpringServlet{
 
     	Question question = qs.getQuestion(request,response);
         questionDAO.update(question);
-        response.sendRedirect("welcome.html");
+        response.sendRedirect("welcome.jsp");
     }
     
 

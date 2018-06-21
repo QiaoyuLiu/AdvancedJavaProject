@@ -35,8 +35,7 @@ QuestionsServices qs;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 	MCQChoice mcqc = qs.getMCQ(request,response);
-
 	mcqChoiceDAO.update(mcqc);
-	response.sendRedirect("welcome.html");
+	response.sendRedirect("welcome.jsp");
 }
 }

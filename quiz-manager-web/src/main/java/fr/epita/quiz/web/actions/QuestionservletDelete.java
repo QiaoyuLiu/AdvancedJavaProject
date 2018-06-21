@@ -29,9 +29,9 @@ public class QuestionservletDelete extends SpringServlet{
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    	Question question = qs.getQuestion(request,response);
+    	Question question = qs.getselectQuestion(request,response);
     	questionDAO.delete(question);
-    	response.sendRedirect("welcome.html");
+    	response.sendRedirect("welcome.jsp");
     }
     
 
