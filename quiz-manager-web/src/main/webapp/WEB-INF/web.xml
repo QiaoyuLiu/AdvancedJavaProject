@@ -38,14 +38,43 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     
-        <servlet>
-        <servlet-name>welcome</servlet-name>
-        <servlet-class>fr.epita.quiz.web.actions.welcomServlet</servlet-class>
+
+    
+    
+    
+    
+            <servlet>
+        <servlet-name>jumptoquestion</servlet-name>
+        <servlet-class>fr.epita.quiz.web.actions.JumptoQuestionServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>welcome</servlet-name>
-        <url-pattern>/welcome</url-pattern>
+        <servlet-name>jumptoquestion</servlet-name>
+        <url-pattern>/jumptoquestion</url-pattern>
+    </servlet-mapping>
+    
+            <servlet>
+        <servlet-name>getstart</servlet-name>
+        <servlet-class>fr.epita.quiz.web.actions.StartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>getstart</servlet-name>
+        <url-pattern>/start</url-pattern>
+    </servlet-mapping>
+    
+    
+    
+    
+    
+        <servlet>
+        <servlet-name>jumptochoice</servlet-name>
+        <servlet-class>fr.epita.quiz.web.actions.JumptoChoiceServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>jumptochoice</servlet-name>
+        <url-pattern>/jumptochoice</url-pattern>
     </servlet-mapping>
     
         <servlet>
@@ -55,7 +84,7 @@
 
     <servlet-mapping>
         <servlet-name>mcqservletcreate</servlet-name>
-        <url-pattern>/mcqcreate</url-pattern>
+        <url-pattern>/choicecreate</url-pattern>
     </servlet-mapping>
     
                 <servlet>
@@ -65,7 +94,7 @@
 
     <servlet-mapping>
         <servlet-name>mcqservletupdate</servlet-name>
-        <url-pattern>/mcqupdate</url-pattern>
+        <url-pattern>/choiceupdate</url-pattern>
     </servlet-mapping>
     
             <servlet>
@@ -75,7 +104,7 @@
 
     <servlet-mapping>
         <servlet-name>mcqservletdelete</servlet-name>
-        <url-pattern>/mcqdelete</url-pattern>
+        <url-pattern>/choicedelete</url-pattern>
     </servlet-mapping>
     
         <servlet>

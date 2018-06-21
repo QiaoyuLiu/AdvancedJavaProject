@@ -19,12 +19,12 @@ questions[1][0] = "a";
 <script language="javascript">
 function startquiz()
 {
-   document.welcome.action="/startquiz";
+   document.welcome.action="start";
    document.welcoome.submit();
 }
 function edit()
 {
-   document.welcome.action="edit.jsp";
+   document.welcome.action="jumptoquestion";
    document.welcome.submit();
 }
 </script>
