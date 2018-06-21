@@ -37,5 +37,6 @@ QuestionsServices qs;
 	MCQChoice mcqc = qs.getMCQ(request,response);
 
 	mcqChoiceDAO.update(mcqc);
+	response.sendRedirect("welcome.html");
 }
 }

@@ -25,6 +25,6 @@ public class MCQservletCreate extends SpringServlet{
 
 		MCQChoice mcqc = qs.getMCQ(request,response);
         mcqChoiceDAO.create(mcqc);
-
+        response.sendRedirect("welcome.html");
 		}
 }

@@ -25,6 +25,6 @@ public class MCQservletDelete extends SpringServlet{
 
 		MCQChoice mcqc = qs.getMCQ(request,response);
         mcqChoiceDAO.delete(mcqc);
-
+        response.sendRedirect("welcome.html");
 		}
 }
