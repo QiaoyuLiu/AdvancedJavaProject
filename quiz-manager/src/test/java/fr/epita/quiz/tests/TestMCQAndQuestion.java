@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
@@ -53,22 +54,25 @@ public class TestMCQAndQuestion {
 	@Test
 	public void testSave() {
 		final Session session = factory.openSession();
-		final Transaction tx = session.beginTransaction();
 		final Question question = new Question();
 		question.setQuestion("How to configure Hibernate?");
 		question.setType(QuestionType.MCQ);
 
 		questDAO.create(question);
+		
 
 		final MCQChoice choice = new MCQChoice();
-		choice.setValid(true);
+		//choice.setValid(true);
 		choice.setChoice("thanks to a LocalSessionFactoryBean instance");
 		choice.setOrder(0);
 		choice.setQuestion(question);
 	
 		mcqDAO.create(choice);
-		tx.commit();
-
+		
+		MCQChoice choices = new MCQChoice();
+		choices.setValid(true);
+		Assert.assertNotEquals(0, mcqDAO.search(choice).size());
+//if(mcqDAO.search(choice).get(0)!=null) System.out.println("good1111");
 	}
 
 }

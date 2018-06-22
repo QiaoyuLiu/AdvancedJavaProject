@@ -15,11 +15,13 @@ import fr.epita.quiz.datamodel.Question;
 
 /**
  * <h3>Description</h3>
- * <p>This class allows to ...</p>
+ * <p>This class allows to build where clause</p>
  *
  * <h3>Usage</h3>
  * <p>This class should be used as follows:
- *   <pre><code>${type_name} instance = new ${type_name}();</code></pre>
+ *   <pre><code>QuestionDao dao = new LoginDao()
+ *   dao.getWhereClauseBuilder(T);
+ *   </code></pre>
  * </p>
  *
  * @since $${version}

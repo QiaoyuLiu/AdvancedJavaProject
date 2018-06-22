@@ -1,5 +1,22 @@
 package fr.epita.quiz.services;
 
+/**
+ * <h3>Description</h3>
+ * <p>This class allows to build login where clause</p>
+ *
+ * <h3>Usage</h3>
+ * <p>This class should be used as follows:
+ *   <pre><code>LoginDao dao = new LoginDao()
+ *   dao.getWhereClauseBuilder(T);
+ *   </code></pre>
+ * </p>
+ *
+ * @since $${version}
+ * @see See also $${link}
+ * @author ${user}
+ *
+ * ${tags}
+ */
 import java.util.LinkedHashMap;
 import java.util.Map;
 

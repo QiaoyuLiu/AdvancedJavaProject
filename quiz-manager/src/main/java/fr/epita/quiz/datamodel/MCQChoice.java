@@ -36,6 +36,7 @@ public class MCQChoice {
 	private Integer id;
 
 	private String choice;
+	@Column(name = "VALID")
 	private boolean valid;
 
 	@Column(name = "MCQCHOICE_ORDER")

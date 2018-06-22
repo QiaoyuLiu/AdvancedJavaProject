@@ -12,15 +12,21 @@ import javax.inject.Inject;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 /**
  * <h3>Description</h3>
- * <p>This class allows to ...</p>
+ * <p>This class allows to search create update and delete</p>
  *
  * <h3>Usage</h3>
  * <p>This class should be used as follows:
- *   <pre><code>${type_name} instance = new ${type_name}();</code></pre>
+ *   <pre><code>GenericORMDao dao = new GenericORMDao()
+ *   dao.create();
+ *   List<T> list = dao.search();
+ *   dao.delete();
+ *   dao.update();
+ *   </code></pre>
  * </p>
  *
  * @since $${version}
@@ -40,7 +46,14 @@ public abstract class GenericORMDao<T> {
 		}
 
 		final Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
 		session.saveOrUpdate(entity);
+		try {
+		tx.commit();
+		}
+		catch (Exception e) {
+			tx.rollback();
+		}
 
 	}
 
@@ -50,12 +63,26 @@ public abstract class GenericORMDao<T> {
 
 	public final void update(T entity) {
 		final Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
 		session.saveOrUpdate(entity);
+		try {
+		tx.commit();
+		}
+		catch (Exception e) {
+			tx.rollback();
+		}
 	}
 
 	public final void delete(T entity) {
 		final Session session = sf.openSession();
+		Transaction tx = session.beginTransaction();
 		session.delete(entity);
+		try {
+		tx.commit();
+		}
+		catch (Exception e) {
+			tx.rollback();
+		}
 	}
 
 	public final List<T> search(T entity) {

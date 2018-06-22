@@ -11,7 +11,23 @@ import fr.epita.quiz.datamodel.MCQChoice;
 import fr.epita.quiz.services.MCQChoiceDAO;
 import fr.epita.quiz.services.QuestionDAO;
 import fr.epita.quiz.web.services.QuestionsServices;
-
+/**
+ * <h3>Description</h3>
+ * <p>This class allows to delete a choice</p>
+ *
+ * <h3>Usage</h3>
+ * <p>This class should be used as follows:
+ *   <pre><code><form action="choicedelete" method="post">
+ * 
+ *   </code></pre>
+ * </p>
+ *
+ * @since $${version}
+ * @see See also $${link}
+ * @author ${user}
+ *
+ * ${tags}
+ */
 public class MCQservletDelete extends SpringServlet{
 	@Inject
 	MCQChoiceDAO mcqChoiceDAO;

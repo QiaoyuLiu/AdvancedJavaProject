@@ -11,7 +11,23 @@ import fr.epita.quiz.services.MCQChoiceDAO;
 import fr.epita.quiz.services.QuestionDAO;
 import fr.epita.quiz.services.QuestionOperationsService;
 import fr.epita.quiz.web.services.QuestionsServices;
-
+/**
+ * <h3>Description</h3>
+ * <p>This class allows to delete a question</p>
+ *
+ * <h3>Usage</h3>
+ * <p>This class should be used as follows:
+ *   <pre><code><form action="questiondelete" method="post">
+ * 
+ *   </code></pre>
+ * </p>
+ *
+ * @since $${version}
+ * @see See also $${link}
+ * @author ${user}
+ *
+ * ${tags}
+ */
 public class QuestionservletDelete extends SpringServlet{
 	/**
 	 * 

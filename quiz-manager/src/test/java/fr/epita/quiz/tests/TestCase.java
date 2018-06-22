@@ -51,8 +51,9 @@ public class TestCase {
 		Assert.assertNotNull(sf);
 
 		final Question question = new Question();
-		question.setQuestion("How to configure Hibernate?");
-		question.setType(QuestionType.MCQ);
+		//question.setQuestion("How to configure Hibernate?");
+		//question.setType(QuestionType.MCQ);
+		question.setId(11);
 
 		final Session session = sf.openSession();
 

@@ -45,13 +45,14 @@ public class Login extends SpringServlet {
 		final String password = request.getParameter("password");
 		System.out.println("login : " + login);
 		System.out.println("password" + password);
-		final boolean authenticated = true;
-				//auth.authenticate(login, password);
-		if (authenticated!=true)
-		//request.getSession().setAttribute("authenticated", authenticated);
-		//request.getSession().setAttribute("userName", login);
+		final boolean authenticated =
+				auth.authenticate(login, password);
+		if (authenticated!=true) {
+		request.getSession().setAttribute("authenticated", authenticated);
+		request.getSession().setAttribute("userName", login);
 
 		response.sendRedirect("index.html");
+		}
 		else response.sendRedirect("welcome.jsp");
 	}
 

@@ -23,11 +23,15 @@ import fr.epita.quiz.datamodel.Question;
 
 /**
  * <h3>Description</h3>
- * <p>This class allows to ...</p>
+ * <p>This class allows to delete questions with all choices,get random questions,and get all the choices of a question</p>
  *
  * <h3>Usage</h3>
  * <p>This class should be used as follows:
- *   <pre><code>${type_name} instance = new ${type_name}();</code></pre>
+ *   <pre><code>QuestionOperationsService service = new QuestionOperationsService();
+ *   service.deleteQuestion(question);
+ *   List<Quesion> list = service.randomQuestion(10);
+ *   service.getChoices(question,4);
+ *   </code></pre>
  * </p>
  *
  * @since $${version}

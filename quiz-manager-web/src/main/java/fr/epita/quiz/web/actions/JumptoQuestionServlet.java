@@ -7,7 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.epita.quiz.web.services.QuestionsServices;
-
+/**
+ * <h3>Description</h3>
+ * <p>This class allows to jump to editquestion.jsp</p>
+ *
+ * <h3>Usage</h3>
+ * <p>This class should be used as follows:
+ *   <pre><code><form action="jumptoquestion" method="post">
+ * 
+ *   </code></pre>
+ * </p>
+ *
+ * @since $${version}
+ * @see See also $${link}
+ * @author ${user}
+ *
+ * ${tags}
+ */
 
 
 public class JumptoQuestionServlet extends SpringServlet{

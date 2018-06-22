@@ -16,16 +16,19 @@ import fr.epita.quiz.datamodel.Login;
 
 /**
  * <h3>Description</h3>
- * <p>This class allows to ...</p>
+ * <p>This class allows to authenticate the login and passwords</p>
  *
  * <h3>Usage</h3>
  * <p>This class should be used as follows:
- *   <pre><code>${type_name} instance = new ${type_name}();</code></pre>
+ *   <pre><code>AuthenticationService instance = new AuthenticationService();
+ *              boolean auth =instance.authenticate(login,password);
+ *   </code></pre>
+ *   
+ *
  * </p>
  *
- * @since $${version}
- * @see See also $${link}
- * @author ${user}
+
+ * @author Qiaoyu.Liu
  *
  * ${tags}
  */

@@ -19,6 +19,26 @@ import fr.epita.quiz.services.MCQChoiceDAO;
 import fr.epita.quiz.services.QuestionDAO;
 import fr.epita.quiz.services.QuestionOperationsService;
 
+/**
+ * <h3>Description</h3>
+ * <p>This class allows to get a mcqchoice instance ,question instance
+ * ,send question data to next page
+ * </p>
+ *
+ * <h3>Usage</h3>
+ * <p>This class should be used as follows:
+ *   <pre><code>QuestionsServices qs = new QuestionsServices();
+ *
+ * 
+ *   </code></pre>
+ * </p>
+ *
+ * @since $${version}
+ * @see See also $${link}
+ * @author ${user}
+ *
+ * ${tags}
+ */
 public class QuestionsServices {
 	@Inject
 	MCQChoiceDAO mcqChoiceDAO;
@@ -26,7 +46,7 @@ public class QuestionsServices {
 	QuestionDAO questionDAO;
 	@Inject
 	QuestionOperationsService qoService;
-	
+	//get MCQ to create or update
 	public MCQChoice getMCQ(HttpServletRequest request, HttpServletResponse response) {
 	    MCQChoice mcqc=new MCQChoice();
 		Question question=new Question();
@@ -44,19 +64,19 @@ public class QuestionsServices {
 		mcqc.setOrder(order);
 		return mcqc;
 	}
-	
+	//get MCQ to delete
 	public MCQChoice getselectChoice(HttpServletRequest request, HttpServletResponse response) {
 		MCQChoice mcqc = new MCQChoice();
 		mcqc.setId(Integer.parseInt(request.getParameter("getselectchoiceid")));
 		return mcqChoiceDAO.search(mcqc).get(0);
 	}
-	
+	//get question to delete or edit its choices
 	public Question getselectQuestion(HttpServletRequest request, HttpServletResponse response) {
 		Question question = new Question();
 		question.setId(Integer.parseInt(request.getParameter("getselectquestionid")));
 		return questionDAO.search(question).get(0);
 		}
-	
+	//send all question messages
 	public void sendQuestionMsg(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		Question quest = new Question();
@@ -69,7 +89,7 @@ public class QuestionsServices {
 				session.setAttribute(String.valueOf(choices.get(i).getId()), choices.get(i).getChoice());
 			}
 	}
-	
+	//send all questions to next page
 	public void sendAllQuestions(HttpServletRequest request, HttpServletResponse response)  {
 		List<Question> questions = questionDAO.search(new Question());
 		HttpSession session = request.getSession();
@@ -79,7 +99,7 @@ public class QuestionsServices {
 		}
 		session.setAttribute("questionsnumber", number);
 	}
-	
+	//get random questions and start the quiz
 	public void randomstart(HttpServletRequest request, HttpServletResponse response)  {
 		int i = 0;
 		int j = 0;
@@ -99,7 +119,7 @@ public class QuestionsServices {
 		session.setAttribute("questionsnumber", number);
 
 	}
-	
+	//get question to update or create
     public Question getQuestion(HttpServletRequest request, HttpServletResponse response) {
 		Question question=new Question();
 		int qid = Integer.parseInt(request.getParameter("getquestionid"));
@@ -109,7 +129,7 @@ public class QuestionsServices {
 		question.setQuestion(questionstring);   	
 		return question;
 		}
-    
+    //return question type
     public QuestionType getQuestionType(HttpServletRequest request) {
     	String type = request.getParameter("getquestiontype");
     	switch (type) {
